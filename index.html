@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Dato-sjekker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f3f3f3;
+        }
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 1.6rem;
+            max-width: 400px;
+        }
+        .small {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="message">Laster...</div>
+
+    <script>
+        function checkDate() {
+            const today = new Date();
+            const target = new Date(today.getFullYear(), 5, 24); // 24. juni
+
+            const msgBox = document.getElementById("message");
+            let message = "";
+
+            // Sjekk om datoen er før, på eller etter
+            if (today.toDateString() === target.toDateString()) {
+                message = "Finally the day!";
+            } else if (today < target) {
+                const diffTime = target - today;
+                const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                message = `Still counting...<div class="small">${daysLeft} dager igjen</div>`;
+            } else {
+                message = "Ready set go";
+            }
+
+            msgBox.innerHTML = message;
+        }
+
+        checkDate();
+    </script>
+</body>
+</html>
+``
